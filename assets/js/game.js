@@ -12,9 +12,6 @@ var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
 
-//You can also log multiple values at once like this 
-console.log(playerName, playerAttack, playerHealth);
-
 var enemyNames = ["Roborto","Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
@@ -22,13 +19,14 @@ var enemyAttack = 12;
 // create function
 var fight = function(enemyName){
     // Alert players that they are starting the round
-    window.alert("Welcome to Robot Gladiators!")
-
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
     //if player choses to fight, then fight
     if(promptFight === "fight" || promptFight === "FIGHT"){
     // remove enemy's health by subtracting the amount set in the playerAttack variable.
+
+    //repeat and execute as long as the enemy-robot is alive
+    while(enemyHealth > 0){
     
     // Subtract the value of 'playerAttack' from the value of 'enemyHealth' and use that result to update the value in the 'enemyHealth' variable
     enemyHealth = enemyHealth - playerAttack;
@@ -53,6 +51,7 @@ var fight = function(enemyName){
     console.log(
         enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
     )
+    }
 
     //check player's health
     if(playerHealth <= 0){
@@ -82,24 +81,9 @@ var fight = function(enemyName){
 };
 // execute function
 
-console.log(playerName);
-console.log("This logs a string, good for leaving yourself a message");
-
-// this will do math and log 20
-console.log(10 + 10);
-
-//what is this?
-console.log("Our robot's " + playerName);
-var name = "Lorreina";
-console.log(name)
-
-console.log(enemyNames.length);
 for(var i = 0; i < enemyNames.length; i++){
-    console.log(enemyNames[i]);
-    console.log(i);
-    console.log(enemyNames[i] + " is at " + i + " index");
-}
-
-for(var i = 0; i < enemyNames.length; i++){
+    var pickedEnemyName = enemyNames[i];
+    enemyHealth = 50;
+    //call fight function with enemy-robot
     fight(enemyNames[i]);
 }
