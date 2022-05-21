@@ -76,27 +76,35 @@ var fightOrSkip = function(){
 
     }
 }
-
 var fight = function(enemy){
+
+    var isPlayerTurn = true;
+
+    if(Math.random() > 0.5){
+        isPlayerTurn = false;
+    }
+
     while(playerInfo.health > 0 && enemy.health > 0){
-        if(fightOrSkip()){
-            // if true, leave fight by breaking loop
-            break;
-        };
-        {
-        // Subtract the enemy.health from playerInfo.attack to get new enemy.health 
-            var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
-            enemy.health = Math.max(0, enemy.health - damage);
+        if(isPlayerTurn){
+            if(fightOrSkip()){
+                // if true, leave fight by breaking loop
+                break;
+            };
         
+            var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+        
+            enemy.health = Math.max(0, enemy.health - damage);
             console.log(
                 playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining." 
             );
+
             if(enemy.health <= 0){
                 window.alert(enemy.name + " has died!");
                 break;
             }   else {
                 window.alert(enemy.name + " still has " + enemy.health + " health left.");
             }
+        } else{
             var damage = randomNumber(enemy.attack - 3, enemy.attack);
             playerInfo.health = Math.max(0, playerInfo.health - damage);
             console.log(
@@ -108,7 +116,8 @@ var fight = function(enemy){
             }   else{
                 window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.")
             }
-        } // I sense a mistake
+        }
+        isPlayerTurn = !isPlayerTurn
     } // end of while loop
 }; // end of fight function
 
